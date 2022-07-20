@@ -1,52 +1,40 @@
-Content-type: text/html; charset=UTF-8
+Content-type: text/html
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML><HEAD><TITLE>Man page of iio_info</TITLE>
+<HTML><HEAD><TITLE>Manpage of iio_reg</TITLE>
 </HEAD><BODY>
-<H1>iio_info</H1>
-Section: LibIIO Utilities (1)<BR>Updated: 21 February 2022<BR><A HREF="#index">Index</A>
+<H1>iio_reg</H1>
+Section: LibIIO Utilities (1)<BR>Updated: 09 August 2022<BR><A HREF="#index">Index</A>
 <A HREF="../index.html">Return to Main Contents</A><HR>
 
 <A NAME="ixAAB"></A>
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
 
-iio_info - list IIO devices and device attributes
+iio_reg - do a low level read or write to SPI or I2C register
 <A NAME="lbAC">&nbsp;</A>
 <H2>SYNOPSIS</H2>
 
-<B>iio_info</B>
+<B>iio_reg</B>
 
 [
 <I>options</I>
 
 ]
--x &lt;xml_file&gt;
-<BR>
-
-<B>iio_info</B>
-
-[
-<I>options</I>
-
-]
--n &lt;hostname&gt;
-<BR>
-
-<B>iio_info</B>
-
-[
-<I>options</I>
-
-]
--u &lt;uri&gt;
+&lt;device&gt; &lt;register&gt; [&lt;value&gt;]
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-<B>iio_info</B>
+<B>iio_reg</B>
 
-is a utility for displaying information about local or remote IIO devices
+is a utility for debugging local IIO devices.
+It should not be used by normal users, and is normally used by driver
+developers during development, or by end users debugging a driver, or sending
+in a feature request.
+It provides a mechanism to read or write SPI or I2C registers for IIO devices.
+This can be useful when troubleshooting IIO devices, and understanding how
+the Linux IIO subsystem is managing the device.
 <P>
+This IIO utility does not work across a network or USB context.
 <A NAME="lbAE">&nbsp;</A>
 <H2>OPTIONS</H2>
 
@@ -55,52 +43,9 @@ is a utility for displaying information about local or remote IIO devices
 
 <DD>
 Tells
-<I>iio_info</I>
+<I>iio_reg</I>
 
 to display some help, and then quit.
-<DT><B>-x, --xml</B>
-
-<DD>
-Use the XML backend with the provided XML file
-<DT><B>-n, --network</B>
-
-<DD>
-Use the network backend with the provided hostname
-<DT><B>-u, --uri</B>
-
-<DD>
-The Uniform Resource Identifier
-<I>(uri)</I>
-
-for connecting to devices, can be one of:
-<DL COMPACT><DT><DD>
-<DL COMPACT>
-<DT>ip:[address]<DD>
-network address, either numeric (192.168.0.1) or network hostname
-<DT>ip:<DD>
-blank, if compiled with zeroconf support, will find an IIO device on network
-<DT>usb:[device:port:instance]<DD>
-normally returned from
-<B>iio_info -s</B>
-
-<DT>serial:[port]<DD>
-<DT>local<DD>
-with no address part
-</DL>
-</DL>
-
-<DT><B>-S, --scan</B>
-
-<DD>
-Scan for available IIO contexts, optional arg of specific backend(s) 'ip', 'usb' or 'ip,usb'.
-Specific options for USB include Vendor ID, Product ID to limit scanning to specific devices 'usb=0456:b673'.
-vid,pid are hexadecimal numbers (no prefix needed), &quot;*&quot; (match any for pid only)
-If no argument is given, it checks all that are availble.
-<DT><B>-a, --auto</B>
-
-<DD>
-Scan for available contexts and if only one is available use it.
-<P>
 </DL>
 <A NAME="lbAF">&nbsp;</A>
 <H2>RETURN VALUE</H2>
@@ -159,8 +104,8 @@ All bugs are tracked at:
 </DL>
 <HR>
 This document was created by
-<A HREF="/cgi-bin/man/man2html">man2html</A>,
+<A HREF="/man/man2html">man2html</A>,
 using the manual pages.<BR>
-Time: 16:36:12 GMT, February 21, 2022
+Time: 14:29:42 GMT, August 09, 2022
 </BODY>
 </HTML>
