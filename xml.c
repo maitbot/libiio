@@ -332,14 +332,8 @@ err_free_device:
 	return iio_ptr(err);
 }
 
-static struct iio_context * xml_clone(const struct iio_context *ctx)
-{
-	return xml_create_context_mem(&ctx->params, ctx->xml, strlen(ctx->xml));
-}
-
 static const struct iio_backend_ops xml_ops = {
 	.create = xml_create_context,
-	.clone = xml_clone,
 };
 
 const struct iio_backend iio_xml_backend = {
