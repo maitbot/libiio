@@ -269,8 +269,12 @@ struct iiod_client * iiod_client_new(const struct iio_context_params *params,
 	return client;
 
 err_free_responder:
-	if (client->responder)
+	if (client->responder) {
+		if (ops->cancel)
+			ops->cancel(desc);
+
 		iiod_responder_destroy(client->responder);
+	}
 err_free_lock:
 	iio_mutex_destroy(client->lock);
 err_free_client:
@@ -280,8 +284,12 @@ err_free_client:
 
 void iiod_client_destroy(struct iiod_client *client)
 {
-	if (client->responder)
+	if (client->responder) {
+		if (client->ops->cancel)
+			client->ops->cancel(client->desc);
+
 		iiod_responder_destroy(client->responder);
+	}
 
 	iio_mutex_destroy(client->lock);
 	free(client);
